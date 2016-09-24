@@ -1,0 +1,33 @@
+#-*-Mode: shell-script;-*-
+
+###########################################################################
+# OS recognition
+
+export OS=`uname -s | cut -d_ -f1`
+export CPU=`uname -m`
+
+if [ "${OS}" == "Darwin" ]; then
+    if [ "${CPU}" == "x86_64" ]; then
+	export ARCHDIR=Mac64
+    else
+	export ARCHDIR=Mac
+    fi
+elif [ "${OS}" == "CYGWIN" ]; then
+    if [ "${CPU}" == "x86_64" ]; then
+	export ARCHDIR=Cygwin64
+    else
+	export ARCHDIR=Cygwin
+    fi
+elif [ "${OS}" == "Linux" ]; then
+    if [ "${CPU}" == "x86_64" ]; then
+	export ARCHDIR=Linux64
+    else
+	export ARCHDIR=Linux
+    fi
+else
+    echo "Your platform ($OS) is not supported."
+    exit 1
+fi
+
+# OS recognition
+###########################################################################
