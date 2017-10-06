@@ -12,3 +12,6 @@
 
 (require 'cask)
 (cask-initialize)
+
+(use-package nyan-mode
+  :init (nyan-mode 1))
