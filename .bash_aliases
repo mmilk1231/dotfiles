@@ -1,4 +1,5 @@
 # 詳細表示
+alias ls='ls -G'
 alias ll='ls -l'
 
 # MATLAB起動
