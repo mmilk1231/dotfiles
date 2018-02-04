@@ -63,11 +63,20 @@
           (setq jedi:use-shortcuts t)
           (add-hook 'python-mode-hook 'jedi:setup)
           (add-to-list 'company-backends 'company-jedi))
-(use-package py-autopep8
-  :config (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
+(use-package py-yapf
+  :config (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
 (use-package flymake-python-pyflakes
   :config (flymake-mode t)
+          (flymake-cursor-mode t)
           (add-hook 'python-mode-hook 'flymake-python-pyflakes-load))
+;; Markdown
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 ;; Nyan mode
 (use-package nyan-mode
   :init (nyan-mode 1))
