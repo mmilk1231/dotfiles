@@ -69,6 +69,9 @@
   :config (flymake-mode t)
           (flymake-cursor-mode t)
           (add-hook 'python-mode-hook 'flymake-python-pyflakes-load))
+(use-package auto-highlight-symbol
+  :config (global-auto-highlight-symbol-mode t)
+          (custom-set-variables '(ahs-default-range (quote ahs-range-whole-buffer))))
 ;; Markdown
 (use-package markdown-mode
   :ensure t
