@@ -5,7 +5,7 @@ Cask (for Emacs): `brew install cask`
 
 virtualenv (for Jedi): `pip install virtualenv`
 
-pyflakes (for flymake-python-pyflakes): `pip install pyflakes`
+pyflakes (for flycheck): `pip install flake8`
 
 yapf (for py-yapf): `pip install yapf`
 

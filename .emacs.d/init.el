@@ -57,21 +57,33 @@
 (add-hook 'shell-mode-hook(lambda ()(set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix)))
 ;; Do not show menubar
 (menu-bar-mode -1)
-;; Python
+;; Show line number
+;(global-linum-mode t)
+(add-hook 'prog-mode-hook 'linum-mode)
+(setq linum-format "%4d |")
+;; Auto-complete (Python)
+(use-package company-quickhelp-mode
+  :config (company-quickhelp-mode 1))
 (use-package jedi-core
   :config (setq jedi:complete-on-dot t)
           (setq jedi:use-shortcuts t)
           (add-hook 'python-mode-hook 'jedi:setup)
           (add-to-list 'company-backends 'company-jedi))
+;; Format code (Python)
 (use-package py-yapf
   :config (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
-(use-package flymake-python-pyflakes
-  :config (flymake-mode t)
-          (flymake-cursor-mode t)
-          (add-hook 'python-mode-hook 'flymake-python-pyflakes-load))
+;; Check syntax (Python)
+(use-package flycheck
+  :config (add-hook 'python-mode-hook 'flycheck-mode))
+(use-package flycheck-popup-tip
+  :config (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode))
+;; Highlight simbol
 (use-package auto-highlight-symbol
   :config (global-auto-highlight-symbol-mode t)
           (custom-set-variables '(ahs-default-range (quote ahs-range-whole-buffer))))
+;; Highlight annotation comment
+(use-package fic-mode
+  :config (add-hook 'prog-mode-hook '(lambda() (fic-mode t))))
 ;; Markdown
 (use-package markdown-mode
   :ensure t
@@ -82,4 +94,4 @@
   :init (setq markdown-command "multimarkdown"))
 ;; Nyan mode
 (use-package nyan-mode
-  :init (nyan-mode 1))
+  :config (nyan-mode 1))
