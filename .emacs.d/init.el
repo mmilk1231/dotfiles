@@ -69,9 +69,9 @@
           (setq jedi:use-shortcuts t)
           (add-hook 'python-mode-hook 'jedi:setup)
           (add-to-list 'company-backends 'company-jedi))
-;; Format code (Python)
-(use-package py-yapf
-  :config (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
+;; Code formatting (Python)
+;; (use-package py-yapf
+;;   :config (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
 ;; Check syntax (Python)
 (use-package flycheck
   :config (add-hook 'python-mode-hook 'flycheck-mode))
