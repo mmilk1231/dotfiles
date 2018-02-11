@@ -1,15 +1,16 @@
 # README #
 
-## Requirements (WIP) ##
-Cask (for Emacs): `brew install cask`
-
-virtualenv (for Jedi): `pip install virtualenv`
-
-pyflakes (for flycheck): `pip install flake8`
-
-yapf (for py-yapf): `pip install yapf`
+## Requirements ##
+- [Cask](http://cask.readthedocs.io/en/latest/) (for Emacs)
+- Python modules
+  - virtualenv (for Jedi)
+  - flake8 (for flycheck)
+  - yapf (for py-yapf)
 
 ## Setting
-`cd <your cask path>`
-
-`cask install`
+1. Clone dotfiles
+1. Install: `sh install.sh`
+1. Install Python modules: `pip install -r requirements.txt`
+1. Install [Cask](http://cask.readthedocs.io/en/latest/)
+1. `cd ~/.emacs.d`
+1. `cask install`
