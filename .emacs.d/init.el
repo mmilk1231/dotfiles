@@ -43,6 +43,14 @@
       )
   (message "This platform is not mac")
   )
+(if (eq sysname 'gnu/linux)
+    (progn
+    ;; Set cask
+    (require 'cask "~/.cask/cask.el")
+    (cask-initialize)
+    )
+  (message "This platform is not linux")
+  )
 
 ;; Company mode
 (use-package company
@@ -62,7 +70,7 @@
 (add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d |")
 ;; Auto-complete (Python)
-(use-package company-quickhelp-mode
+(use-package company-quickhelp
   :config (company-quickhelp-mode 1))
 (use-package jedi-core
   :config (setq jedi:complete-on-dot t)
