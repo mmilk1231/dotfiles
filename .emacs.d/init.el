@@ -4,7 +4,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-;; Decision OS
+;; Recognition OS
 (setq sysname system-type)
 
 (if (eq sysname 'cygwin)
@@ -69,6 +69,8 @@
 ;(global-linum-mode t)
 (add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d |")
+;; Disable Git pager
+(setenv "GIT_PAGER" "")
 ;; Auto-complete (Python)
 (use-package company-quickhelp
   :config (company-quickhelp-mode 1))
