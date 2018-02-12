@@ -70,7 +70,7 @@
 (add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d |")
 ;; Disable Git pager
-(setenv "GIT_PAGER" "")
+(setenv "GIT_PAGER" "nkf -w|colordiff")
 ;; Auto-complete (Python)
 (use-package company-quickhelp
   :config (company-quickhelp-mode 1))
