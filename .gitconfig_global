@@ -1,0 +1,16 @@
+## Write following in your .gitconfig
+# [include]
+# 	path = ~/.gitconfig_global
+##
+[core]
+	editor = emacs
+	quotepath = false
+	excludesfile = ~/.gitignore_global
+[color]
+	ui = auto
+[alias]
+	wdiff = diff --color-words --ignore-all-space
+	ldiff = difftool -y -t latex
+# From http://www.math.cmu.edu/~gautam/sj/blog/20140301-git-latexdiff.html
+[difftool.latex]
+        cmd = ldiff "$LOCAL" "$REMOTE" "$MERGED"
