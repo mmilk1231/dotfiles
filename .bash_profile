@@ -1,5 +1,6 @@
 export PATH=/usr/local/bin:$PATH
 export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+export PATH=$PATH:"${HOME}/bin"
 
 # anyenv
 if [ -d $HOME/.anyenv ] ; then

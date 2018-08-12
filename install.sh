@@ -5,7 +5,7 @@ BUCKUPDIR=$DOTDIR/backup_`date +%Y%m%d%H%M%S`
 
 FILES=( ".bash_profile" ".bashrc" ".bash_aliases"
 	".emacs.d/init.el" ".emacs.d/Cask"
-        ".gitconfig_global")
+        ".gitconfig_global" "bin/ldiff")
 
 echo mkdir $BUCKUPDIR
 mkdir $BUCKUPDIR
