@@ -51,4 +51,10 @@ fi
 ######## Commmon Aliases ########
 alias ll='ls -l'
 alias emacs='\emacs -nw'
+
+if [[ -x `which colordiff` ]]; then
+  alias diff='colordiff -u'
+else
+  alias diff='diff -u'
+fi
 ######## End of Common Aliases ########
