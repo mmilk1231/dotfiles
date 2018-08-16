@@ -9,14 +9,14 @@ if [ -d $HOME/.anyenv ] ; then
 fi
 
 # pyenv-virtualenv
-if [ -d $HOME/.anyenv/envs/pyenv/plugins/pyenv-virtualenv/ ] ; then
+if [ -d $HOME/.anyenv/envs/pyenv/plugins/pyenv-virtualenv ] ; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
 # python
-export PYTHONHOME="" #$(pyenv prefix)"
-export PYTHONPATH="" #$(pyenv prefix)/bin"
-export PKG_CONFIG_PATH="$(pyenv prefix)/lib/pkgconfig:$PKG_CONFIG_PATH"
+if [ -d $HOME/.anyenv/envs/pyenv ] ; then
+    export PKG_CONFIG_PATH="$(pyenv prefix)/lib/pkgconfig:$PKG_CONFIG_PATH"
+fi
 
 # cuda
 export CUDAROOT=/usr/local/cuda
@@ -28,8 +28,10 @@ export CUDA_INC_DIR=$CUDAROOT/bin:$CUDA_INC_DIR
 
 # roboschool
 export ROBOSCHOOL_PATH=$HOME/Documents/roboschool
-export C_INCLUDE_PATH=$(pyenv prefix)/include:$(pyenv prefix)/include/python3.7m
-export CPLUS_INCLUDE_PATH=$(pyenv prefix)/include:$(pyenv prefix)/include/python3.7m
+if [ -d $ROBOSCHOOL_PATH ] ; then
+    export C_INCLUDE_PATH=$(pyenv prefix)/include:$(pyenv prefix)/include/python3.7m
+    export CPLUS_INCLUDE_PATH=$(pyenv prefix)/include:$(pyenv prefix)/include/python3.7m
+fi
 
 # qt
 export PATH="/usr/local/opt/qt/bin:$PATH"
