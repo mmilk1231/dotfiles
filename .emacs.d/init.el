@@ -3,12 +3,14 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-
 ;; Recognition OS
 (setq sysname system-type)
 (if (eq sysname 'cygwin)
-    ;; Share the clipboard
     (progn
+      ;; Set cask
+      (require 'cask "~/.cask/cask.el")
+      (cask-initialize)\
+      ;; Share the clipboard
       (defun paste-from-cygwin ()
 	(with-temp-buffer
 	  (insert-file-contents "/dev/clipboard")
@@ -18,15 +20,15 @@
 	  (insert text)))
       (setq interprogram-cut-function 'cut-to-cygwin)
       (setq interprogram-paste-function 'paste-from-cygwin)
-      ;; Set cask
-      (require 'cask "~/.cask/cask.el")
-      (cask-initialize)
       )
   (message "This platform is not cygwin")
   )
 (if (eq sysname 'darwin)
-   ;; Share the clipboard
     (progn
+      ;; Set cask
+      (require 'cask)
+      (cask-initialize)
+      ;; Share the clipboard
       (defun copy-from-osx ()
 	(shell-command-to-string "reattach-to-user-namespace pbpaste"))
       (defun paste-to-osx (text &optional push)
@@ -36,21 +38,25 @@
 	    (process-send-eof proc))))
       (setq interprogram-cut-function 'paste-to-osx)
       (setq interprogram-paste-function 'copy-from-osx)
-      ;; Set cask
-      (require 'cask)
-      (cask-initialize)
       )
   (message "This platform is not mac")
   )
 (if (eq sysname 'gnu/linux)
     (progn
-    ;; Set cask
-    (require 'cask "~/.cask/cask.el")
-    (cask-initialize)
-    )
+      ;; Set cask
+      (require 'cask "~/.cask/cask.el")
+      (cask-initialize)
+      ;; Share the clipboard
+      (setq x-select-enable-clipboard t)
+      (setq x-select-enable-primary t)
+      (use-package xclip
+	:config (xclip-mode t))
+      )
   (message "This platform is not linux")
   )
 
+;; Take over path from shell
+(exec-path-from-shell-initialize)
 ;; Company mode
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode))
