@@ -31,7 +31,8 @@ pyenv global $PYTHON_VER
 pip install epc flake8 virtualenv
 
 # Emacs with cask
-brew install emacs cask reattach-to-user-namespace
+brew install emacs reattach-to-user-namespace
+curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 cd ~/.emacs.d/
 cask install
 
