@@ -105,16 +105,17 @@
 (use-package auctex
   :ensure t
   :init (setq-default TeX-master nil)
-        (setq LaTeX-command-default "latexmk")
+        (setq TeX-view-program-selection
+	      '((output-dvi "Skim")
+		(output-pdf "Skim")))
+        (setq TeX-view-program-list
+	      '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %s.pdf %b")))
   :mode ("\\.tex\\'" . latex-mode))
 (use-package auctex-latexmk
   :ensure t
   :config (auctex-latexmk-setup)
-          (setq TeX-view-program-selection
-		'((output-dvi "Skim")
-		  (output-pdf "Skim")))
-          (setq TeX-view-program-list
-		'(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %s.pdf %b"))))
+  :init (add-hook 'LaTeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk")))
+        (add-hook 'latex-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))
 (use-package reftex
   :ensure t
   :init (setq reftex-plug-into-AUCTeX t)
