@@ -1,6 +1,8 @@
 (source gnu)
 (source melpa)
 
+(depends-on "auctex")
+(depends-on "auctex-latexmk")
 (depends-on "auto-highlight-symbol")
 (depends-on "bind-key")
 (depends-on "cask")
@@ -28,6 +30,7 @@
 (depends-on "projectile")
 (depends-on "py-yapf")
 (depends-on "py-autopep8")
+(depends-on "reftex")
 (depends-on "s")
 (depends-on "smartparens")
 (depends-on "smex")

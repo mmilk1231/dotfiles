@@ -95,6 +95,28 @@
 	 ("\\.md\\'" . markdown-mode)
 	 ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+;; LaTeX
+(use-package auctex
+  :ensure t
+  :init (setq-default TeX-master nil)
+        (setq LaTeX-command-default "latexmk")
+  :mode ("\\.tex\\'" . latex-mode))
+(use-package auctex-latexmk
+  :ensure t
+  :config (auctex-latexmk-setup)
+          (setq TeX-view-program-selection
+		'((output-dvi "Skim")
+		  (output-pdf "Skim")))
+          (setq TeX-view-program-list
+		'(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %s.pdf %b"))))
+(use-package reftex
+  :ensure t
+  :init (setq reftex-plug-into-AUCTeX t)
+        (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+        (add-hook 'latex-mode-hook 'turn-on-reftex))
+(use-package server
+  :ensure t
+  :config (unless (server-running-p) (server-start)))
 ;; Nyan mode
 (use-package nyan-mode
   :config (nyan-mode 1))
