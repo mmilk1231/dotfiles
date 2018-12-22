@@ -4,6 +4,7 @@ DOTDIR=$(cd $(dirname $0) && pwd)
 BUCKUPDIR=$DOTDIR/backup_`date +%Y%m%d%H%M%S`
 
 FILES=( ".bash_profile" ".bashrc" ".bash_aliases"
+	".profile"
 	".emacs.d/init.el" ".emacs.d/Cask"
         ".gitconfig_global" "bin/ldiff")
 
