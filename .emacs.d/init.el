@@ -18,9 +18,6 @@
 	  (insert text)))
       (setq interprogram-cut-function 'cut-to-cygwin)
       (setq interprogram-paste-function 'paste-from-cygwin)
-      ;; Set cask
-      (require 'cask "~/.cask/cask.el")
-      (cask-initialize)
       )
   (message "This platform is not cygwin")
   )
@@ -36,21 +33,18 @@
 	    (process-send-eof proc))))
       (setq interprogram-cut-function 'paste-to-osx)
       (setq interprogram-paste-function 'copy-from-osx)
-      ;; Set cask
-      (require 'cask)
-      (cask-initialize)
       )
   (message "This platform is not mac")
   )
 (if (eq sysname 'gnu/linux)
     (progn
-    ;; Set cask
-    (require 'cask "~/.cask/cask.el")
-    (cask-initialize)
     )
   (message "This platform is not linux")
   )
 
+;; Set cask
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
 ;; Company mode
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode))
