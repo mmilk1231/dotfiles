@@ -1,5 +1,36 @@
+#!/bin/bash
+
+######## OS Recognition ########
+OS=`uname -s | cut -d_ -f1`
+CPU=`uname -m`
+
+if [ "${OS}" == "Darwin" ]; then
+    if [ "${CPU}" == "x86_64" ]; then
+	export ARCHDIR=Mac64
+    else
+	export ARCHDIR=Mac
+    fi
+elif [ "${OS}" == "CYGWIN" ]; then
+    if [ "${CPU}" == "x86_64" ]; then
+	export ARCHDIR=Cygwin64
+    else
+	export ARCHDIR=Cygwin
+    fi
+elif [ "${OS}" == "Linux" ]; then
+    if [ "${CPU}" == "x86_64" ]; then
+	export ARCHDIR=Linux64
+    else
+	export ARCHDIR=Linux
+    fi
+else
+    echo "Your platform ($OS) is not supported."
+    exit 1
+fi
+######## End of OS Recognition ########
+
+
+######## Commmon Paths ########
 export PATH=/usr/local/bin:$PATH
-export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
 export PATH=$PATH:$HOME/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
 
@@ -18,14 +49,6 @@ fi
 if [ -d $HOME/.anyenv/envs/pyenv ] ; then
     export PKG_CONFIG_PATH="$(pyenv prefix)/lib/pkgconfig:$PKG_CONFIG_PATH"
 fi
-
-# cuda
-export CUDAROOT=/usr/local/cuda
-export PATH=$PATH:$CUDAROOT/bin
-export LD_LIBRARY_PATH=$CUDAROOT/lib64:$CUDAROOT/lib:$LD_LIBRARY_PATH
-export CPATH=$CPATH:$CUDAROOT/include
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$CUDAROOT/include
-export CUDA_INC_DIR=$CUDAROOT/bin:$CUDA_INC_DIR
 
 # roboschool
 export ROBOSCHOOL_PATH=$HOME/Documents/roboschool
@@ -49,3 +72,31 @@ export LD_LIBRARY_PATH="/usr/local/opt/gettext/lib/:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="/usr/local/opt/gettext/lib/:$LIBRARY_PATH"
 export C_INCLUDE_PATH="/usr/local/opt/gettext/include:$C_INCLUDE_PATH"
 export CPLUS_INCLUDE_PATH="/usr/local/opt/gettext/include:$CPLUS_INCLUDE_PATH"
+
+######## End of Common Paths ########
+
+
+######## Paths Depend on OS ########
+if [ "${ARCHDIR}" == "Mac" -o "${ARCHDIR}" == "Mac64" ]; then
+    ######## Mac ########
+    export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+    ######## End of Mac ########
+elif [ "${ARCHDIR}" == "Linux" -o "${ARCHDIR}" == "Linux64" ]; then
+    ######## Linux ########
+    # cuda
+    export CUDAROOT=/usr/local/cuda
+    export PATH=$PATH:$CUDAROOT/bin
+    export LD_LIBRARY_PATH=$CUDAROOT/lib64:$CUDAROOT/lib:$LD_LIBRARY_PATH
+    export CPATH=$CPATH:$CUDAROOT/include
+    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$CUDAROOT/include
+    export CUDA_INC_DIR=$CUDAROOT/bin:$CUDA_INC_DIR
+
+    # texlive
+    export PATH="/usr/local/texlive/2018/bin/x86_64-linux:$PATH"
+    ######## End of Linux ########
+elif [ "${ARCHDIR}" == "Cygwin" -o "${ARCHDIR}" == "Cygwin64" ]; then
+    ######## Cygwin ########
+    ######## End of Cygwin ########
+fi
+######## End of Paths Depend on OS ########
+
