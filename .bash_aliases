@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ######## OS Recognition ########
 OS=`uname -s | cut -d_ -f1`
 CPU=`uname -m`
@@ -38,6 +40,7 @@ if [ "${ARCHDIR}" == "Mac" -o "${ARCHDIR}" == "Mac64" ]; then
 elif [ "${ARCHDIR}" == "Linux" -o "${ARCHDIR}" == "Linux64" ]; then
     ######## Linux ########
     alias ls='ls --color=auto -a'
+    alias open='xdg-open 2>/dev/null'
     alias matlab="/usr/local/MATLAB/R2016b/bin/matlab -nodisplay"
     ######## End of Linux ########
 elif [ "${ARCHDIR}" == "Cygwin" -o "${ARCHDIR}" == "Cygwin64" ]; then
