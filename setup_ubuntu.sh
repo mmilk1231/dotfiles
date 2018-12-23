@@ -21,14 +21,21 @@ pyenv global $PYTHON_VER
 # flycheck dependency
 pip install epc flake8 virtualenv
 
-# Emacs with cask
+# Emacs and its dependency
+## Emacs
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
 sudo apt install -y emacs25
 sudo update-alternatives --config emacs
+## Cask
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 cd ~/.emacs.d/
 cask install
+## xclip
+sudo apt install -y xclip
+
+# Japanese
+sudo apt install -y ibus-mozc
 
 # Roboschool dependecy
 ## Boost
