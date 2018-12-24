@@ -78,6 +78,10 @@
 (use-package server
   :ensure t
   :config (unless (server-running-p) (server-start)))
+;; treemacs
+(use-package treemacs
+  :ensure t
+  :defer t)
 ;; Nyan mode
 (use-package nyan-mode
   :config (nyan-mode 1))
