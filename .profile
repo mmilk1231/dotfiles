@@ -96,6 +96,7 @@ elif [ "${ARCHDIR}" == "Linux" -o "${ARCHDIR}" == "Linux64" ]; then
     ######## End of Linux ########
 elif [ "${ARCHDIR}" == "Cygwin" -o "${ARCHDIR}" == "Cygwin64" ]; then
     ######## Cygwin ########
+    :
     ######## End of Cygwin ########
 fi
 ######## End of Paths Depend on OS ########
