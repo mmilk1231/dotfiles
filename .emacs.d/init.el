@@ -89,6 +89,14 @@
 	      (add-hook 'latex-mode-hook 'flycheck-mode)
 	      (add-hook 'LaTeX-mode-hook 'flycheck-mode))
   :config (progn(flycheck-define-checker
+	     link-grammar "link-grammar check"
+	     :command ("linkgrammarengchkfile" source-inplace)
+	     :error-patterns ((warning line-start (file-name) ":" line ":" column ": "
+				       (id (one-or-more (not (any " "))))
+				       (message) line-end))
+	     :modes (text-mode markdown-mode gfm-mode latex-mode LaTeX-mode))
+	    (add-to-list 'flycheck-checkers 'link-grammar)
+	    (flycheck-define-checker
 		 proselint "A linter for prose."
 		 :command ("proselint" source-inplace)
 		 :error-patterns ((warning line-start (file-name) ":" line ":" column ": "
