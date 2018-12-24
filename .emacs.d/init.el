@@ -24,9 +24,8 @@
 ;; Do not show menubar
 (menu-bar-mode -1)
 ;; Show line number
-;(global-linum-mode t)
-(add-hook 'prog-mode-hook 'linum-mode)
-(setq linum-format "%4d |")
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode t))
 ;; Disable Git pager
 (setenv "GIT_PAGER" "nkf -w|colordiff")
 ;; Auto-complete (Python)
