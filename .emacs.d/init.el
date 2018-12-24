@@ -12,6 +12,7 @@
 (exec-path-from-shell-initialize)
 ;; Company mode
 (use-package company
+  :defer t
   :init (add-hook 'after-init-hook 'global-company-mode))
 ;; Set the language to Japanese
 (set-language-environment 'Japanese)
@@ -32,17 +33,20 @@
 (use-package company-quickhelp
   :config (company-quickhelp-mode 1))
 (use-package jedi-core
-  :config (setq jedi:complete-on-dot t)
-          (setq jedi:use-shortcuts t)
-          (add-hook 'python-mode-hook 'jedi:setup)
-          (add-to-list 'company-backends 'company-jedi))
+  :defer t
+  :init (progn(add-hook 'python-mode-hook 'jedi:setup)
+	      (add-to-list 'company-backends 'company-jedi))
+  :config (progn(setq jedi:complete-on-dot t)
+		(setq jedi:use-shortcuts t)))
 ;; Highlight simbol
 (use-package auto-highlight-symbol
-  :config (global-auto-highlight-symbol-mode t)
-          (custom-set-variables '(ahs-default-range (quote ahs-range-whole-buffer))))
+  :config (progn(global-auto-highlight-symbol-mode t)
+		(custom-set-variables '(ahs-default-range (quote ahs-range-whole-buffer)))))
 ;; Highlight annotation comment
 (use-package fic-mode
-  :config (add-hook 'prog-mode-hook '(lambda() (fic-mode t))))
+  :ensure t
+  :defer t
+  :init (add-hook 'prog-mode-hook '(lambda() (fic-mode t))))
 ;; Markdown
 (use-package markdown-mode
   :ensure t
@@ -58,16 +62,18 @@
   :mode ("\\.tex\\'" . latex-mode))
 (use-package auctex-latexmk
   :ensure t
-  :config (auctex-latexmk-setup)
-  :init (add-hook 'LaTeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk")))
-        (add-hook 'latex-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))
+  :defer t
+  :init (progn(add-hook 'LaTeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk")))
+              (add-hook 'latex-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))
+  :config (auctex-latexmk-setup))
 (use-package reftex
   :ensure t
-  :init (setq reftex-plug-into-AUCTeX t)
-        (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-        (add-hook 'latex-mode-hook 'turn-on-reftex))
+  :init (progn(setq reftex-plug-into-AUCTeX t)
+              (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+              (add-hook 'latex-mode-hook 'turn-on-reftex)))
 (use-package server
   :ensure t
+  :defer t
   :config (unless (server-running-p) (server-start)))
 ;; treemacs
 (use-package treemacs
@@ -126,7 +132,7 @@
       (setq interprogram-paste-function 'copy-from-osx)
       ;; LaTeX
       (setq TeX-view-program-selection
-	    '((output-dvi "Skim")
+            '((output-dvi "Skim")
 	      (output-pdf "Skim")))
       (setq TeX-view-program-list
 	    '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %s.pdf %b")))
