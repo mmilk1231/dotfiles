@@ -28,7 +28,7 @@ env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install $PYTHON_VER
 pyenv global $PYTHON_VER
 
 # flycheck dependency
-pip install epc flake8 virtualenv
+pip install epc flake8 virtualenv proselint
 
 # Emacs with cask
 brew install emacs reattach-to-user-namespace

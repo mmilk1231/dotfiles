@@ -36,14 +36,6 @@
           (setq jedi:use-shortcuts t)
           (add-hook 'python-mode-hook 'jedi:setup)
           (add-to-list 'company-backends 'company-jedi))
-;; Code formatting (Python)
-;; (use-package py-yapf
-;;   :config (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
-;; Check syntax (Python)
-(use-package flycheck
-  :config (add-hook 'python-mode-hook 'flycheck-mode))
-(use-package flycheck-popup-tip
-  :config (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode))
 ;; Highlight simbol
 (use-package auto-highlight-symbol
   :config (global-auto-highlight-symbol-mode t)
@@ -81,6 +73,26 @@
 (use-package treemacs
   :ensure t
   :defer t)
+;; flycheck
+(use-package flycheck
+  :defer t
+  :init (progn(add-hook 'python-mode-hook 'flycheck-mode)
+	      (add-hook 'text-mode-hook 'flycheck-mode)
+	      (add-hook 'markdown-mode-hook 'flycheck-mode)
+	      (add-hook 'gfm-mode-hook 'flycheck-mode)
+	      (add-hook 'latex-mode-hook 'flycheck-mode)
+	      (add-hook 'LaTeX-mode-hook 'flycheck-mode))
+  :config (progn(flycheck-define-checker
+		 proselint "A linter for prose."
+		 :command ("proselint" source-inplace)
+		 :error-patterns ((warning line-start (file-name) ":" line ":" column ": "
+					   (id (one-or-more (not (any " "))))
+					   (message) line-end))
+		 :modes (text-mode markdown-mode gfm-mode latex-mode LaTeX-mode))
+		(add-to-list 'flycheck-checkers 'proselint)))
+(use-package flycheck-popup-tip
+  :defer t
+  :init (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode))
 ;; Nyan mode
 (use-package nyan-mode
   :config (nyan-mode 1))
