@@ -6,6 +6,7 @@ readonly BOOST_VER="1.68.0"
 readonly QT_VER="5.10"
 readonly GOI_VER="1.56.1"
 readonly POPPLER_VER="0.67.0"
+readonly LINKGRAMMAR_VER="5.5.1"
 
 # XCode
 xcode-select --install
@@ -28,7 +29,14 @@ env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install $PYTHON_VER
 pyenv global $PYTHON_VER
 
 # flycheck dependency
-pip install epc flake8 virtualenv proselint
+pip install epc flake8 virtualenv proselint engchecker2flycheck
+## link-grammar
+curl http://www.abisource.com/downloads/link-grammar/${LINKGRAMMAR_VER}/{link-grammar-${LINKGRAMMAR_VER}.tar.gz} -o ~/#1
+cd ~
+tar xvf link-grammar-${LINKGRAMMAR_VER}.tar.gz
+cd link-grammar-${LINKGRAMMAR_VER}
+./configure --disable-editline --disable-java-bindings --enable-python-bindings=3 --prefix=$(pyenv prefix)
+make && make install
 
 # Emacs with cask
 brew install emacs reattach-to-user-namespace
