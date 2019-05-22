@@ -9,7 +9,10 @@
 ;; Recognition OS
 (setq sysname system-type)
 ;; Take over path from shell
-(exec-path-from-shell-initialize)
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config (exec-path-from-shell-initialize))
 ;; Company mode
 (use-package company
   :defer t
