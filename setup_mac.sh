@@ -20,6 +20,10 @@ brew doctor
 # Anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
 source ~/.bash_profile
+
+# Anyenv update
+mkdir -p $(anyenv root)/plugins
+git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
     
 # Python (pyenv, pyenv-virtualenv)
 anyenv install pyenv

@@ -10,7 +10,11 @@ readonly POPPLER_VER="0.67.0"
 # Anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
 source ~/.bash_profile
-    
+
+# Anyenv update
+mkdir -p $(anyenv root)/plugins
+git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+
 # Python (pyenv, pyenv-virtualenv)
 anyenv install pyenv
 git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.anyenv/envs/pyenv/plugins/pyenv-virtualenv
