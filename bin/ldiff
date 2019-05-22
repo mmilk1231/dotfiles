@@ -13,7 +13,7 @@ if [[ "${MERGED##*.}" == tex ]]; then
         [[ "$confirm" != y && "$confirm" != yes ]] && exit 1
     fi
 
-    latexdiff "$LOCAL" "$REMOTE" > "$output"
+    latexdiff -t CFONT --math-markup=1 "$LOCAL" "$REMOTE" --append-safecmd="bm" --exclude-textcmd "bm" > "$output"
     echo "Generated $output"
 else
     echo "Skipped $MERGED (non tex)."
