@@ -17,6 +17,10 @@ brew update
 brew upgrade
 brew doctor
 
+# git completion
+curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o ~/.git-flow-completion.bash https://raw.githubusercontent.com/bobthecow/git-flow-completion/master/git-flow-completion.bash
+
 # Anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
 source ~/.bash_profile
