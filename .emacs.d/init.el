@@ -30,6 +30,11 @@
 ;; Show line number
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode t))
+;; Color theme
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-github t))
 ;; Disable Git pager
 (setenv "GIT_PAGER" "nkf -w|colordiff")
 ;; Auto-complete (Python)
@@ -42,9 +47,20 @@
   :config (progn(setq jedi:complete-on-dot t)
 		(setq jedi:use-shortcuts t)))
 ;; Highlight simbol
+;(use-package highlight-symbol
+;  :ensure t
+;  :defer t
+;  :bind (("\M-n" . highlight-symbol-next)
+;         ("\M-p" . highlight-symbol-prev)
+;	 ("\C-x\C-a" . 'highlight-symbol-query-replace))
+;  :init (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+;  :config (setq highlight-symbol-idle-delay 0))
 (use-package auto-highlight-symbol
-  :config (progn(global-auto-highlight-symbol-mode t)
-		(custom-set-variables '(ahs-default-range (quote ahs-range-whole-buffer)))))
+  :ensure t
+  :defer t
+  :init (add-hook 'prog-mode-hook 'auto-highlight-symbol-mode)
+  :config (progn(setq ahs-default-range 'ahs-range-whole-buffer)
+		(setq ahs-idle-interval 0)))
 ;; Highlight annotation comment
 (use-package fic-mode
   :ensure t

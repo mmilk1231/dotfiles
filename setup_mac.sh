@@ -53,6 +53,9 @@ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 cd ~/.emacs.d/
 cask install
 
+# Color theme
+git clone https://github.com/martinlindhe/base16-iterm2.git ~/base16-iterm2
+
 # Roboschool dependecy
 ## Boost
 source ~/.bash_profile
