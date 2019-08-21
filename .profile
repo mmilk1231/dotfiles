@@ -34,6 +34,11 @@ export PATH=/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
 
+# git-prompt
+if [[ `type -t __git_ps1` ]] ; then
+    export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+fi
+
 # anyenv
 if [ -d $HOME/.anyenv ] ; then
     export PATH=$PATH:${HOME}/.anyenv/bin
