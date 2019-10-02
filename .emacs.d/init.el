@@ -13,6 +13,10 @@
   :if (memq window-system '(mac ns))
   :ensure t
   :config (exec-path-from-shell-initialize))
+;; Bash completion
+(use-package bash-completion
+  :defer t
+  :init (add-hook 'shell-dynamic-complete-functions 'bash-completion-dynamic-complete))
 ;; Company mode
 (use-package company
   :defer t
