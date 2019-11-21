@@ -17,6 +17,11 @@ brew update
 brew upgrade
 brew doctor
 
+# git completion
+curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+curl -o ~/.git-flow-completion.bash https://raw.githubusercontent.com/bobthecow/git-flow-completion/master/git-flow-completion.bash
+
 # Anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
 source ~/.bash_profile
@@ -47,6 +52,9 @@ brew install emacs reattach-to-user-namespace
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 cd ~/.emacs.d/
 cask install
+
+# Color theme
+git clone https://github.com/martinlindhe/base16-iterm2.git ~/base16-iterm2
 
 # Roboschool dependecy
 ## Boost

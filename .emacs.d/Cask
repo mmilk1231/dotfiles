@@ -4,6 +4,8 @@
 (depends-on "auctex")
 (depends-on "auctex-latexmk")
 (depends-on "auto-highlight-symbol")
+(depends-on "base16-theme")
+(depends-on "bash-completion")
 (depends-on "bind-key")
 (depends-on "cask")
 (depends-on "company")
