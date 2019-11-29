@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # Set parameters
-readonly PYTHON_VER="3.7.0"
+readonly PYTHON_VER="3.7.3"
 readonly BOOST_VER="1.68.0"
 readonly QT_VER="5.10"
 readonly GOI_VER="1.56.1"
 readonly POPPLER_VER="0.67.0"
+readonly ROS_KINETIC_INSTALL=1
+readonly PYMPRESS_INSTALL=1
 
 # Anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
@@ -41,6 +43,12 @@ sudo apt install -y xclip
 # Japanese
 sudo apt install -y ibus-mozc
 
+# Terminator
+sudo add-apt-repository ppa:gnome-terminator
+sudo apt update
+sudo apt install -y terminator
+sudo update-alternatives --config x-terminal-emulator
+
 # Roboschool dependecy
 ## Boost
 source ~/.bash_profile
@@ -64,30 +72,39 @@ sudo apt install -y cmake ffmpeg pkg-config qtbase5-dev libqt5opengl5-dev libass
 git clone https://github.com/openai/roboschool.git ~/roboschool
 pip install -e $ROBOSCHOOL_PATH
 
-# Pympress dependency
-## GObject Introspection
-# brew install gtk+3 libffi automake
-# source ~/.bash_profile
-# git clone https://github.com/GNOME/gobject-introspection.git ~/gobject-introspection
-# cd ~/gobject-introspection
-# git checkout "$GOI_VER"
-# ./autogen.sh
-# ./configure --with-python="$(pyenv prefix)/bin/python3"
-# make -j4
-# make install
+readonly ROS_KINETIC_INSTALL=1
+# ROS Kinetic and its dependency
+if [ $ROS_KINETIC_INSTALL = 1 ]; then
+    # TODO
+fi
 
-## Pygobject
-# pip install pygobject
+# Pympress and its dependency
+if [ $PYMPRESS_INSTALL = 1 ]; then
+    # Pympress dependency
+    ## GObject Introspection
+    # brew install gtk+3 libffi automake
+    # source ~/.bash_profile
+    # git clone https://github.com/GNOME/gobject-introspection.git ~/gobject-introspection
+    # cd ~/gobject-introspection
+    # git checkout "$GOI_VER"
+    # ./autogen.sh
+    # ./configure --with-python="$(pyenv prefix)/bin/python3"
+    # make -j4
+    # make install
 
-## Poppler
-# brew install openjpeg gettext glib
-# git clone https://anongit.freedesktop.org/git/poppler/poppler.git ~/poppler
-# git checkout "poppler-${POPPLER_VER}"
-# mkdir ~/poppler/build
-# cd ~/poppler/build
-# cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=OFF ..
-# make -j4
-# make install
+    ## Pygobject
+    # pip install pygobject
 
-# Pympress
-# pip install pympress
+    ## Poppler
+    # brew install openjpeg gettext glib
+    # git clone https://anongit.freedesktop.org/git/poppler/poppler.git ~/poppler
+    # git checkout "poppler-${POPPLER_VER}"
+    # mkdir ~/poppler/build
+    # cd ~/poppler/build
+    # cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=OFF ..
+    # make -j4
+    # make install
+
+    # Pympress
+    # pip install pympress
+fi
