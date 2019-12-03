@@ -3,6 +3,8 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
+;; Do not check signature because of failure to verify signature
+(setq package-check-signature nil)
 ;; Set cask
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
