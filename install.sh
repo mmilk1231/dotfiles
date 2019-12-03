@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DOTDIR=$(cd $(dirname $0) && pwd)
 BUCKUPDIR=$DOTDIR/backup_`date +%Y%m%d%H%M%S`
