@@ -130,9 +130,14 @@
 ;	     :modes (text-mode markdown-mode gfm-mode latex-mode LaTeX-mode))
 ;	    (add-to-list 'flycheck-checkers 'proselint))
 )
+(use-package flycheck-color-mode-line
+  :defer t
+  :init (eval-after-load "flycheck"
+	    '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)))
 (use-package flycheck-popup-tip
   :defer t
-  :init (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode))
+  :init (eval-after-load "flycheck"
+	    '(add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode)))
 ;; Nyan mode
 (use-package nyan-mode
   :config (nyan-mode 1))

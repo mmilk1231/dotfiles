@@ -19,6 +19,7 @@
 (depends-on "fic-mode")
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
+(depends-on "flycheck-color-mode-line")
 (depends-on "flycheck-popup-tip")
 (depends-on "htmlize")
 (depends-on "idle-highlight-mode")
