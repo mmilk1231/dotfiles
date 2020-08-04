@@ -3,6 +3,8 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
+;; Do not check signature because of failure to verify signature
+(setq package-check-signature nil)
 ;; Set cask
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
@@ -128,9 +130,14 @@
 ;	     :modes (text-mode markdown-mode gfm-mode latex-mode LaTeX-mode))
 ;	    (add-to-list 'flycheck-checkers 'proselint))
 )
+(use-package flycheck-color-mode-line
+  :defer t
+  :init (eval-after-load "flycheck"
+	    '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)))
 (use-package flycheck-popup-tip
   :defer t
-  :init (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode))
+  :init (eval-after-load "flycheck"
+	    '(add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode)))
 ;; Nyan mode
 (use-package nyan-mode
   :config (nyan-mode 1))

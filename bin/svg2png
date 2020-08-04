@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "${ARCHDIR}" == "Mac" -o "${ARCHDIR}" == "Mac64" ]; then
+    qlmanage -t -s 2000 -o . $1 && convert $1.png -trim $1.png
+elif [ "${ARCHDIR}" == "Linux" -o "${ARCHDIR}" == "Linux64" ]; then
+    inkscape $1 --export-png $1.png
+else
+    echo "Your platform (${ARCHDIR}) is not supported."
+    exit 1
+fi

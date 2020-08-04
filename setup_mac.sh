@@ -7,6 +7,7 @@ readonly QT_VER="5.10"
 readonly GOI_VER="1.56.1"
 readonly POPPLER_VER="0.67.0"
 readonly LINKGRAMMAR_VER="5.5.1"
+readonly PYMPRESS_INSTALL=1
 
 # XCode
 xcode-select --install
@@ -80,30 +81,32 @@ brew install cmake tinyxml assimp ffmpeg qt
 git clone https://github.com/openai/roboschool.git ~/Documents/roboschool
 pip install -e $ROBOSCHOOL_PATH
 
-# Pympress dependency
-## GObject Introspection
-brew install gtk+3 libffi automake
-source ~/.bash_profile
-git clone https://github.com/GNOME/gobject-introspection.git ~/Documents/gobject-introspection
-cd ~/Documents/gobject-introspection
-git checkout "$GOI_VER"
-./autogen.sh
-./configure --with-python="$(pyenv prefix)/bin/python3"
-make -j4
-make install
+if [ $PYMPRESS_INSTALL = 1 ]; then
+    # Pympress dependency
+    ## GObject Introspection
+    brew install gtk+3 libffi automake
+    source ~/.bash_profile
+    git clone https://github.com/GNOME/gobject-introspection.git ~/Documents/gobject-introspection
+    cd ~/Documents/gobject-introspection
+    git checkout "$GOI_VER"
+    ./autogen.sh
+    ./configure --with-python="$(pyenv prefix)/bin/python3"
+    make -j4
+    make install
 
-## Pygobject
-pip install pygobject
+    ## Pygobject
+    pip install pygobject
 
-## Poppler
-brew install openjpeg gettext glib
-git clone https://anongit.freedesktop.org/git/poppler/poppler.git ~/Documents/poppler
-git checkout "poppler-${POPPLER_VER}"
-mkdir ~/Documents/poppler/build
-cd ~/Documents/poppler/build
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=OFF ..
-make -j4
-make install
+    ## Poppler
+    brew install openjpeg gettext glib
+    git clone https://anongit.freedesktop.org/git/poppler/poppler.git ~/Documents/poppler
+    git checkout "poppler-${POPPLER_VER}"
+    mkdir ~/Documents/poppler/build
+    cd ~/Documents/poppler/build
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_RPATH=OFF ..
+    make -j4
+    make install
 
-# Pympress
-pip install pympress
+    # Pympress
+    pip install pympress
+fi
