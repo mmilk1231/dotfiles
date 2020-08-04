@@ -58,6 +58,10 @@ cask install
 # Color theme
 git clone https://github.com/martinlindhe/base16-iterm2.git ~/base16-iterm2
 
+# pdfocr
+curl https://raw.githubusercontent.com/ssh0/dotfiles/master/bin/{pdfocr} -o ~/bin/#1
+chmod +x ~/bin/pdfocr
+
 # Roboschool dependecy
 ## Boost
 source ~/.bash_profile
